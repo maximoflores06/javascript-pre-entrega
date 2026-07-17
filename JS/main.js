@@ -1,12 +1,21 @@
 let nombre = prompt("ingresa tu nombre");
 
-let mensaje = "tu nombre es " + nombre;
-console.log(nombre);
+let mensaje = "bienvenido " + nombre;
+console.log(mensaje);
+alert (mensaje)
 
 let edad = parseInt(prompt("ingresa tu edad"));
-mensaje = "tu edad es " + edad;
-console.log(edad);
+mensaje = "tu edad es : " + edad;
+console.log(mensaje);
+alert (mensaje)
 
 let resultado = 2026 - edad;
-mensaje = nombre + ", tu año de nacimiento es " + resultado;
+mensaje = nombre + ",naciste en " + resultado;
 console.log(mensaje);
+alert (mensaje)
+
+let Localidad = prompt ("¿De que país eres?")
+mensaje = "Perfecto, te recomendaremos sobre " + Localidad
+console.log(mensaje)
+alert(mensaje)
+
