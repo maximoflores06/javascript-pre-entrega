@@ -1,34 +1,48 @@
-mensaje = "Bienvenido al soporte de socios del club";
-alert(mensaje);
-let usuario = ""
-let contrasenia =""
-while ( usuario !== "Maximo Flores" || contrasenia !== "1234"
-){
- usuario = prompt("ingresa tu nombre")
- contrasenia = prompt ("ingresa tu contraseña")
-if (usuario !== "Maximo Flores" || contrasenia !== "1234")
-    mensaje = "Usuario o contraseña incorrectos"
-    alert (mensaje)
-    console.log ("usuario o contraseña incorrectos");
+function inicio (){
+    let nombre = prompt("ingresa tu nombre")
+    alert  ("bienvenido " + nombre)
 }
-console.log ("usuario y contraseña correctos")
-mensaje = "BIENVENIDO"
-alert (mensaje);
-let edad = Number(prompt("ingresa tu edad"))
-if (edad >= 18){
-console.log ("el socio es: mayor")
-mensaje = "Eres MAYOR"
-alert (mensaje);
+inicio ()
+function sumar (a, b){
+    let resultado = a + b;
+    return resultado;
 }
-else if (edad >= 15 && edad <=17){
-    console.log ("el socio es: cadete mayor")
-mensaje = "Eres CADETE MENOR"
-alert (mensaje);
-}
-else {
-    console.log ("el socio es: cadete menor")
-    mensaje = "Eres CADETE MENOR"
-    alert (mensaje);
-}
+const restar = (a, b) => a - b
+const dividir = (a, b) => a / b
 
 
+let operación = Number (prompt(
+    "que operación realizaras?\n" +
+    "1.suma\n" +
+    "2.resta \n" +
+    "3.división\n"+
+    "0.salir "
+)
+);
+while (operación != 0){
+let nro1 = Number (prompt ("ingrese el valor 1"))
+let nro2 = Number (prompt ("ingrese el valor 2"))
+
+switch (operación) {
+    case 1: console.log(sumar (nro1, nro2))
+    alert ("tu resultado es " + sumar (nro1, nro2))
+    break;
+    case 2: console.log(restar (nro1, nro2))
+     alert ("tu resultado es " + restar (nro1, nro2))
+    break;
+    case 3: console.log(dividir(nro1,nro2))
+    alert ("tu resultado es " +dividir(nro1,nro2))
+    default:
+}
+
+operación = Number (prompt(
+    "que operación realizaras?\n" +
+    "1.suma\n" +
+    "2.resta \n" +
+    "3.división\n"+
+    "0.salir "
+)
+);
+}
+console.log ("saliste del programa")
+alert ("Saliste del programa");
