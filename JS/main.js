@@ -1,40 +1,50 @@
-function inicio (){
-    let nombre = prompt("ingresa tu nombre")
-    alert  ("bienvenido " + nombre)
-    console.log (nombre + " ingresó a la página")
+
+  function inicio () {
+    let name = prompt("Ingresa tu nombre")
+    alert ("Hola " + name + " Bienvenido a nuestra tienda gamer")
 }
+
 inicio()
 
-const tareas = ["estudio", "cocinar", "hacer las compras","limpiar habitaciones", "preparar ropa de trabajo"]
-console.log (tareas.join (","))
+class producto {
+    constructor (nombre, precio, marca ,stock, ofertaporcentaje, oferta) {
+        this.nombre = nombre
+        this.precio = precio
+        this.marca = marca
+        this.stock = stock
+        this.ofertaporcentaje = ofertaporcentaje
+        this.oferta = oferta
+    }
 
-const agreagarfinal = tareas.push ("Poner ropa a lavar")
-console.log ("se añadió una tarea")
-console.log(tareas.join (","))
-
-let agregarinicio = tareas.unshift ("Darle comida al perro")
-console.log ("se agregó una tarea al inicio de la lista")
-console.log (tareas.join (","))
-
-const eliminar = tareas.pop ()
-console.log ("se eliminó la tarea " + eliminar)
-console.log (tareas.join (","))
-
-let buscar = prompt ("Busque su tarea: ")
-console.log (tareas.includes(buscar))
-if (tareas.includes(buscar)){
-    console.log ("la tarea " + buscar + " está en la lista " + "en la posición " + tareas.indexOf(buscar))
-    alert ("la tarea " + buscar + " está en la lista " + "en la posición " + tareas.indexOf(buscar))
-}
-else{
-    console.log ("la tarea " + buscar + " no está en la lista" )
-    alert ("la tarea " + buscar + " no está en la lista")
-}
-console.log ("se cambió la tarea por Limpiar patio")
-tareas.splice (1, 1, "limpiar patio")
-console.log (tareas.join (","))
-
-for (const tarea of tareas){
-    console.log (" tarea a realizar : " + tarea)
+ofertaproducto(){
+    let preciooferta = this.precio - (this.precio * this.ofertaporcentaje / 100)
+    return preciooferta
 }
 
+fechaOferta(){
+    console.log("el producto " + this.nombre + " está en oferta hasta el día " + this.oferta)
+}
+}
+
+const producto1 = new producto ("auriculares bluetooth", 100000, "red dragon", 14, 10, "10/10/2026")
+console.log(producto1)
+console.log("Precio en oferta: $" + producto1.ofertaproducto())
+producto1.fechaOferta()
+
+
+const producto2 = new producto ("mouse precición", 70000, "logitech", 35, 10 ,"23/9/2026") 
+console.log(producto2)
+console.log("Precio en oferta: $" + producto2.ofertaproducto())
+producto2.fechaOferta()
+
+
+const producto3 = new producto ("teclado mecánico", 90000, "red dragon", 20, 10, "30/9/2026")
+console.log(producto3)
+console.log("Precio en oferta: $" + producto3.ofertaproducto())
+producto3.fechaOferta()
+
+
+const producto4 = new producto ("mousepad", 30000, "logitech", 40, 10, "25/9/2026")
+console.log(producto3)
+console.log("Precio en oferta: $" + producto4.ofertaproducto())
+producto3.fechaOferta()
