@@ -1,50 +1,43 @@
 
   function inicio () {
     let name = prompt("Ingresa tu nombre")
-    alert ("Hola " + name + " Bienvenido a nuestra tienda gamer")
+    alert ("Hola " + name + " Bienvenido a nuestra perfumería ")
 }
 
 inicio()
 
-class producto {
-    constructor (nombre, precio, marca ,stock, ofertaporcentaje, oferta) {
-        this.nombre = nombre
-        this.precio = precio
-        this.marca = marca
-        this.stock = stock
-        this.ofertaporcentaje = ofertaporcentaje
-        this.oferta = oferta
-    }
+const perfumes = [
+    { nombre: "Lattafa Khamarah", precio: 89000, categoría: "árabes", tamaño: "50ml" },
+    { nombre: "Lataffa Asad Edp", precio: 41000, categoría: "árabes", tamaño: "50ml" },
+    { nombre: "Lattafa Yara", precio: 40000, categoría: "árabes", tamaño: "100ml" },
+    { nombre: "Good girl", precio: 298000, categoría: "Carolina Herrera", tamaño:"80ml" },
+    { nombre: "212 vip rosé", precio: 157000, categoría: "Carolina Herrera", tamaño:"50ml" },
+    { nombre: "Acqua di gio tradicional", precio: 297000, categoría: "Giorgio Armani", tamaño:"100ml" }
+];
+perfumes.forEach((perfume, index) => {
+    console.log(index + " - perfume: " + perfume.nombre);
+});
 
-ofertaproducto(){
-    let preciooferta = this.precio - (this.precio * this.ofertaporcentaje / 100)
-    return preciooferta
+const preciodolar = perfumes.map((perfume) => {
+    return {nombre: perfume.nombre, precio: perfume.precio / 1500, categoría: perfume.categoría, tamaño: perfume.tamaño};
+});
+console.table(perfumes);
+
+let búsqueda = prompt(
+"Buscá tu perfume"
+)
+let perfumeEncontrado = perfumes.find (
+    (perfumes) => 
+        perfumes.nombre.toUpperCase().trim() == búsqueda.toUpperCase().trim()
+);
+
+if ( perfumeEncontrado){
+   console.log("El perfume está disponible y su precio es: $" + perfumeEncontrado.precio )
+    console.log("Buscar en el catálogo su valor USD")
+    console.table (preciodolar)
+}else {
+    console.log("perfume no disponible")
 }
 
-fechaOferta(){
-    console.log("el producto " + this.nombre + " está en oferta hasta el día " + this.oferta)
-}
-}
-
-const producto1 = new producto ("auriculares bluetooth", 100000, "red dragon", 14, 10, "10/10/2026")
-console.log(producto1)
-console.log("Precio en oferta: $" + producto1.ofertaproducto())
-producto1.fechaOferta()
-
-
-const producto2 = new producto ("mouse precición", 70000, "logitech", 35, 10 ,"23/9/2026") 
-console.log(producto2)
-console.log("Precio en oferta: $" + producto2.ofertaproducto())
-producto2.fechaOferta()
-
-
-const producto3 = new producto ("teclado mecánico", 90000, "red dragon", 20, 10, "30/9/2026")
-console.log(producto3)
-console.log("Precio en oferta: $" + producto3.ofertaproducto())
-producto3.fechaOferta()
-
-
-const producto4 = new producto ("mousepad", 30000, "logitech", 40, 10, "25/9/2026")
-console.log(producto3)
-console.log("Precio en oferta: $" + producto4.ofertaproducto())
-producto3.fechaOferta()
+const carrito = perfumes.reduce((total, perfumes) => total + perfumes.precio, 0);
+console.log("El total de tu compra es: $" + carrito)
