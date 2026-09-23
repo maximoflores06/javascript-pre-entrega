@@ -10,64 +10,32 @@
 </head>
 <body>
     <header>
-      <h1 id="titulo">Mi negocio</h1>
+      <h1 id="titulo">Botines</h1>
       <nav>
         <ul>
           <li><a href="#" class="link">Inicio</a></li>
-          <li><a href="#productos" class="link">Productos</a></li>
-          <li><a href="./pages/carrito.html" class="link">Carrito</a></li>
         </ul>
       </nav>
     </header>
     <main>
       <h2>Productos</h2>
-      <form>
-        <input type="text" placeholder="Buscar..." />
-        <input type="submit" value="Buscar" />
-      </form>
 
-      <!-- Aquí se van a cargar los productos desde el DOM-->
       <section id="productos" class="productos"></section>
 
       <section>
-        <h3>Agregar producto</h3>
-        <form id="form-agregar-producto" class="form-agregar-producto">
-          <input
-            type="text"
-            name="nombre"
-            placeholder="Nombre del producto"
-            id="input-nombre"
-          />
-          <input
-            type="number"
-            name="precio"
-            placeholder="Precio del producto"
-            id="input-precio"
-          />
-          <input
-            type="text"
-            name="imagen"
-            placeholder="URL de la imagen del producto"
-            id="input-imagen"
-          />
-          <input
-            type="text"
-            name="descripcion"
-            placeholder="Descripcion del producto"
-            id="input-descripcion"
-          />
-          <input type="submit" value="Agregar producto" />
-        </form>
-      </section><section>
-        <h3>Carrito</h3>
-        <!-- Aquí se van a cargar los productos agregados al carrito -->
-        <section id="carrito" class="productos"></section>
+        <h3>Organizar Productos</h3>
+        <label for="inputProducto">Productos</label>
+        <input type="text" id="inputProducto" placeholder="Ingresar producto...">  
+        <button id="btnAgregar">Agregar botin</button>
+        <button id="btnEliminar">Eleminar Productos</button>
+        <button id="btnRestaurar">botines en stock</button>
       </section>
+        
     </main>
     <footer>
       <span>&copy;2026</span>
     </footer>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     </body>
 
 </html>

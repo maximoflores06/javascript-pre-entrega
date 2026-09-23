@@ -1,121 +1,138 @@
-const productos = [
+const productosIniciales = [
   {
     id: 1,
-    nombre: "Guitarra Gracia M10",
-    descripcion: "Guitarra criolla con equipo de sonido integrado y afinador",
-    precio: 120000,
-    imagen: "🎸",
+    producto: "Botin adidas f50",
   },
   {
     id: 2,
-    nombre: "Violin  Cremona SV-50",
-    descripcion: " tapa de abeto macizo y buena estabilidad de afinación.",
-    precio: 150000 ,
-    imagen: "🎻",
+    producto: "Botin nike phamthom",
   },
   {
     id: 3,
-    nombre: "Teclado Yamaha PSR-E283",
-    descripcion: "61 teclas y variables de sonido",
-    precio: 327000,
-    imagen: "🎹",
+    producto: "Botin adidas predator",
   },
   {
     id: 4,
-    nombre: "Micrófono Shure SM58",
-    descripcion: "Estándar de la industria para presentaciones en vivo. Controla el ruido de fondo, resiste golpes y hace que la voz destaque",
-    precio: 250000,
-    imagen: "🎤",
+    producto: "Botin nike mercurial",
   },
   {
     id: 5,
-    nombre: "Metrónomo digital",
-    descripcion: "Recargable y de facil uso",
-    precio: 50000,
-    imagen: "🎚️",
+    producto: "Botin nike total 90",
   },
 ];
-const titulo = document.getElementById("titulo");
-titulo.innerText = "Tu music";
-
-const texto = document.createElement ("p");
-texto.innerText = "Explora nuestros intrumentos";
 
 
-const subtitulo = document.querySelector("h2");
-subtitulo.appendChild(texto);
+
+if (!localStorage.getItem("misProductos")) {
+  localStorage.setItem("misProductos", JSON.stringify(productosIniciales));
+}
+
+
+
+let productos = JSON.parse(localStorage.getItem("misProductos"));
 
 const carrito = [];
 
-function imprimirProducto (){
 
-const contenedorProductos = document.getElementById("productos");
-contenedorProductos.innerHTML = "";
-productos.forEach((producto) => {
+function imprimirProductos() {
+
+  const contenedorProductos = document.getElementById("productos");
+
+  contenedorProductos.innerHTML = "";
+
+  productos.forEach((producto) => {
+
     const card = document.createElement("article");
+
     card.classList.add("card");
-  card.innerHTML = `
 
-   
-      <span>${producto.imagen}</span>
-      <h3>${producto.nombre}</h3>
-      <p>${producto.descripcion}</p>
-      <p>${producto.precio}</p>
-      <button id="${producto.nombre}${producto.id}">agregar al  carrito</button>
+    card.innerHTML = `
+      <span>⚽</span>
+      <h3>${producto.producto}</h3>
+      <button id="${producto.id}">Agregar al carrito</button>
+    `;
 
-  `;
+    contenedorProductos.appendChild(card);
 
-  contenedorProductos.appendChild(card);
+    const btnCompra = document.getElementById(`${producto.id}`);
 
-  const btnProducto = document.getElementById(
-    `${producto.nombre}${producto.id}`,
+    btnCompra.addEventListener("click", () => {
+
+      Toastify({
+        text:`Producto agregado al carrito: ${producto.producto}`,
+        duration: 3000,
+        gravity: "top",
+        position: "left",
+        onClick: function () {}
+      }).showToast();
+
+      carrito.push(producto);
+    });
+
+  });
+}
+
+
+
+const inputProducto = document.getElementById("inputProducto");
+const btnAgregar = document.getElementById("btnAgregar");
+const btnEliminar = document.getElementById("btnEliminar");
+const btnRestaurar = document.getElementById("btnRestaurar")
+
+function mostrarEnDOM(){ imprimirProductos() }
+
+
+btnAgregar.addEventListener("click", () => {
+
+  const texto = inputProducto.value.trim();
+
+  if (texto !== "") {
+
+    const nuevoProducto = {
+      id: Date.now(),
+      producto: texto
+    };
+
+    productos.push(nuevoProducto);
+
+  
+    localStorage.setItem(
+      "misProductos",
+      JSON.stringify(productos)
+    );
+
+    imprimirProductos();
+
+    
+    inputProducto.value = "";
+  }
+});
+
+
+
+imprimirProductos();
+
+
+btnEliminar.addEventListener("click", () => {
+
+  productos = [];
+
+  localStorage.setItem("misProductos", JSON.stringify(productos));
+  imprimirProductos();
+
+});
+
+
+
+btnRestaurar.addEventListener("click", () => {
+
+  productos = productosIniciales;
+
+  localStorage.setItem(
+    "misProductos",
+    JSON.stringify(productos)
   );
 
-  btnProducto.addEventListener("click" , () => {
-        Toastify({
-    text: `Producto agregado al carrito: ${producto.nombre}`,
-    duration: 3000,
-    gravity: "top", 
-    position: "center", 
-    onClick: function(){} 
-}).showToast()
-        carrito.push(producto);
-  })
-});
-}
-imprimirProducto()
-
-const btn = document.getElementById("button");
-
-function acciondelboton() {
-    alert("click");
-
-}
-
-function agregarProducto () {
-    const formParaProductos = document.getElementById("form-agregar-producto")
-    formParaProductos.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-    const inputNombre = document.getElementById("input-nombre").value;
-   
-
-    const inputPrecio = document.getElementById("input-precio").value;
-    
-    
-    const inputImagen = document.getElementById("input-imagen").value;
-    
-
-    const inputDescripcion = document.getElementById("input-descripcion").value;
-    
-
-
-    productos.push({nombre: inputNombre, precio: inputPrecio, imagen: inputImagen,
-        descripcion: inputDescripcion
-    })
-    
-imprimirProducto()
+  imprimirProductos();
 
 });
-}
-agregarProducto()
