@@ -1,138 +1,117 @@
-const productosIniciales = [
-  {
-    id: 1,
-    producto: "Botin adidas f50",
-  },
-  {
-    id: 2,
-    producto: "Botin nike phamthom",
-  },
-  {
-    id: 3,
-    producto: "Botin adidas predator",
-  },
-  {
-    id: 4,
-    producto: "Botin nike mercurial",
-  },
-  {
-    id: 5,
-    producto: "Botin nike total 90",
-  },
-];
+const URL = "../JS/json/productos.json";
+const formularioBotines = document.getElementById("formularioBotines")
+const Botines = document.getElementById("idBotines")
+const resultado= document.getElementById("resultado")
 
 
 
-if (!localStorage.getItem("misProductos")) {
-  localStorage.setItem("misProductos", JSON.stringify(productosIniciales));
+formularioBotines.addEventListener("submit", BuscarBotin )
+
+async function cargarCatalogo() {
+
+    try {
+
+        const respuesta = await fetch(URL);
+
+        if (!respuesta.ok) {
+            throw new Error("No se pudieron cargar los productos");
+        }
+
+        const productos = await respuesta.json();
+
+        mostrarProductos(productos);
+
+    } catch (error) {
+
+        console.error(error);
+
+        Swal.fire({
+            title: "Error",
+            text: "No se pudo cargar el catálogo",
+            icon: "error"
+        });
+
+    } finally {
+
+        console.log("Carga del catálogo finalizada");
+
+    }
 }
 
+function mostrarProductos(productos) {
 
+    const catalogo = document.getElementById("catalogo");
 
-let productos = JSON.parse(localStorage.getItem("misProductos"));
+    catalogo.innerHTML = "";
 
-const carrito = [];
+    productos.forEach(producto => {
 
+        catalogo.innerHTML += `
+            <article class="producto">
 
-function imprimirProductos() {
+            
+                <h2>${producto.nombre}</h2>
 
-  const contenedorProductos = document.getElementById("productos");
+                <p>$${producto.precio}</p>
 
-  contenedorProductos.innerHTML = "";
+               
 
-  productos.forEach((producto) => {
+            </article>
+        `;
 
-    const card = document.createElement("article");
-
-    card.classList.add("card");
-
-    card.innerHTML = `
-      <span>⚽</span>
-      <h3>${producto.producto}</h3>
-      <button id="${producto.id}">Agregar al carrito</button>
-    `;
-
-    contenedorProductos.appendChild(card);
-
-    const btnCompra = document.getElementById(`${producto.id}`);
-
-    btnCompra.addEventListener("click", () => {
-
-      Toastify({
-        text:`Producto agregado al carrito: ${producto.producto}`,
-        duration: 3000,
-        gravity: "top",
-        position: "left",
-        onClick: function () {}
-      }).showToast();
-
-      carrito.push(producto);
     });
-
-  });
 }
 
+cargarCatalogo();
 
 
-const inputProducto = document.getElementById("inputProducto");
-const btnAgregar = document.getElementById("btnAgregar");
-const btnEliminar = document.getElementById("btnEliminar");
-const btnRestaurar = document.getElementById("btnRestaurar")
-
-function mostrarEnDOM(){ imprimirProductos() }
-
-
-btnAgregar.addEventListener("click", () => {
-
-  const texto = inputProducto.value.trim();
-
-  if (texto !== "") {
-
-    const nuevoProducto = {
-      id: Date.now(),
-      producto: texto
-    };
-
-    productos.push(nuevoProducto);
-
-  
-    localStorage.setItem(
-      "misProductos",
-      JSON.stringify(productos)
-    );
-
-    imprimirProductos();
-
+async function BuscarBotin(event){
     
-    inputProducto.value = "";
-  }
-});
+  event.preventDefault();
+  const nombre = Botines.value.toLowerCase();
 
 
+  try{
+    const respuesta = await fetch(URL);
 
-imprimirProductos();
+    if(!respuesta.ok){
+      throw new Error("La peticion no es correcta")
+    }
+
+    const Botin = await respuesta.json();
+
+    const producto = Botin.find(
+    producto => producto.nombre.toLowerCase() === nombre)
+
+    if (!producto) {
+      throw new Error("Modelo no encontrado");
+     }
 
 
-btnEliminar.addEventListener("click", () => {
+    console.log(Botin)
+  
+    resultado.innerHTML = `
+    <article class="card">
+                <h2>${producto.nombre}</h2>
+                <p>Precio: $${producto.precio}</p>
+            </article>`
+  
+  }catch (error) {
+    console.error(error);
+    Swal.fire({
+    title: "Botin no encontrado",
+    text: "No hay en stock",
+    icon: "error"
+    
+    
+  });
+  }}
 
-  productos = [];
-
-  localStorage.setItem("misProductos", JSON.stringify(productos));
-  imprimirProductos();
-
-});
-
-
-
-btnRestaurar.addEventListener("click", () => {
-
-  productos = productosIniciales;
-
-  localStorage.setItem(
-    "misProductos",
-    JSON.stringify(productos)
-  );
-
-  imprimirProductos();
-
-});
+  setTimeout (() => {Swal.fire({ 
+  title: "<strong>Hay una <u>oferta</u></strong>",
+  icon: "info",
+  html: `
+    20% off <b>en botines </b>,
+    <a href="#" autofocus>Adidas</a>
+  `,
+});}, 4000)

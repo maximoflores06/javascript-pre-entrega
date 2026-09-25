@@ -92,3 +92,15 @@ footer {
   padding: 10px;
   text-align: center;
 }
+#catalogo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.producto {
+    border: 1px solid hsl(0, 0%, 2%);
+    padding: 20px;
+    text-align: center;
+    background-color: rgb(202, 255, 255);
+}

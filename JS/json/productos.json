@@ -1,0 +1,32 @@
+[
+    {
+        "id" : 1,
+        "nombre": "Adidas predator",
+        "precio": 150000
+    },
+    {
+        "id": 2,
+        "nombre": "Adidas f50",
+        "precio": 160000
+    },
+    {
+        "id": 3,
+        "nombre": "Nike phamtom",
+        "precio": 140000
+    },
+    {
+        "id": 4,
+        "nombre": "Nike mercurial",
+        "precio": 150000
+    },
+    {
+        "id": 5,
+        "nombre" : "Puma ultra ultimate ",
+        "precio" : 90000
+    },
+    {
+        "id" : 6,
+        "nombre": "Puma future",
+        "precio": 110000
+    }
+]

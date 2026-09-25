@@ -4,38 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/styles.css">
-    <title>javascript</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script src="./JS/main.js" defer></script>
+    <title>Botines ITZ</title> 
+    <script src="./js/main.js" defer></script>
 </head>
-<body>
-    <header>
-      <h1 id="titulo">Botines</h1>
+    <body>
+      <header>
+        <h1 id="titulo">Botines ITZ</h1>
       <nav>
         <ul>
           <li><a href="#" class="link">Inicio</a></li>
         </ul>
       </nav>
     </header>
-    <main>
-      <h2>Productos</h2>
-
-      <section id="productos" class="productos"></section>
-
-      <section>
-        <h3>Organizar Productos</h3>
-        <label for="inputProducto">Productos</label>
-        <input type="text" id="inputProducto" placeholder="Ingresar producto...">  
-        <button id="btnAgregar">Agregar botin</button>
-        <button id="btnEliminar">Eleminar Productos</button>
-        <button id="btnRestaurar">botines en stock</button>
-      </section>
-        
+    <main class="contenedor">
+        <h1>Algunos de nuestros modelos</h1>
+        <p>
+            Ingrese el modelo de botin que este buscando
+        </p>
+        <form id="formularioBotines">
+            <label for="idBotines">
+                Inserte aqui marca y modelo
+            </label>
+            <input
+                type="text"
+                id="idBotines"
+                min="1"
+                placeholder= "Ej : Adidas predator"
+                required
+            >
+            <button type="submit">
+                Buscar 
+            </button>
+        </form>
+        <section id="resultado"></section>
+        <section id="catalogo"></section>
+        <div id="imagen"></div>
     </main>
-    <footer>
-      <span>&copy;2026</span>
-    </footer>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    </body>
+
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
 
 </html>
